@@ -1,0 +1,77 @@
+#include<iostream>
+#include<iomanip>
+#include<cmath>
+#include<string>
+using namespace std;
+
+struct standardtime
+{
+	int hour;
+	int minute;
+	int second;
+	string period;
+};
+
+struct militarytime
+{
+	int hour = 0;
+	int minute = 0;
+	int second = 0;
+};
+
+int conversion(standardtime& usertime)
+{
+	militarytime converted;
+	if (usertime.period == "AM" || usertime.period == "am" && usertime.hour != 12)
+	{
+		converted.hour = usertime.hour;
+		cout << converted.hour << endl;
+		return converted.hour;
+	}
+	else if(usertime.period == "AM" || usertime.period == "am" && usertime.hour == 12)
+	{
+		converted.hour = 0;
+		cout << converted.hour << endl;
+		return converted.hour;
+	}
+	else if (usertime.period == "PM" || usertime.period == "pm")
+	{
+		converted.hour = usertime.hour + 12;
+		cout << converted.hour << endl;
+		return converted.hour;
+	}
+	else
+	{
+		cout << "error?" << endl;
+		return 1000000000000;
+	}
+
+	converted.minute = usertime.minute;
+	converted.second = usertime.second;
+
+}
+
+int main()
+{
+	standardtime usertime;
+	cout << "Please enter the time you wish to conver into military time" << endl;
+	cout << "Hour: ";
+	cin >> usertime.hour;
+	cout << "Minute: ";
+	cin >> usertime.minute;
+	cout << "Second: ";
+	cin >> usertime.second;
+	cout << "Please enter whether it's AM or PM: ";
+	cin >> usertime.period; 
+	cout << endl;
+	conversion(usertime);
+	militarytime converted;
+	cout << endl;
+	cout << "The Time that was entered was: "
+		<< usertime.hour << ":" << usertime.minute << ":" << usertime.second <<
+		" " << usertime.period << endl;
+	cout << "the converted time is: " 
+		<< converted.hour << ":" << converted.minute << ":" << converted.second 
+		<< endl;
+
+}
